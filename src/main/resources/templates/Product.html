@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table border="1">
+     <tr>
+         <th>Id</th>
+         <th>Name</th>
+         <th>Price</th>
+         <th>Desc</th>
+         <th>Img1</th>
+         <th>Img2</th>
+         <th>Img3</th>
+         <th>Img4</th>
+         <th>Sale</th>
+         <th>Sex</th>
+         <th>Category</th>
+     </tr>
+        <tr th:each="pr: ${product}" >
+            <td th:text="${pr.productId}"></td>
+            <td th:text="${pr.productName}"></td>
+            <td th:text="${pr.productPrice}"></td>
+            <td th:text="${pr.productDesc}"></td>
+            <td th:text="${pr.productImg1}"></td>
+            <td th:text="${pr.productImg2}"></td>
+            <td th:text="${pr.productImg3}"></td>
+            <td th:text="${pr.productImg4}"></td>
+            <td th:text="${pr.productSale} +'%'">%</td>
+            <td th:unless="${pr.sex}"><span th:text="Nam"></span></td>
+            <td th:text="${pr.category.categoryName}"></td>
+        </tr>
+     </table>
+</body>
+</html>
