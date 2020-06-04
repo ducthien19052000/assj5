@@ -20,6 +20,7 @@ public class Product {
     private String productImg3;
     private String productImg4;
     private double productSale;
+    private boolean productStatus;
     private boolean sex;
 
     @ManyToOne
@@ -35,6 +36,4 @@ public class Product {
     private List<BillDetail> billDetails;
     public Product() {
     }
-
-
 }

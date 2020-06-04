@@ -2,11 +2,17 @@ package com.assj5.thien.assj5.service;
 
 import com.assj5.thien.assj5.model.BillDetail;
 import com.assj5.thien.assj5.model.Product;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface ProductSevice {
-    List<Product> findAll();
+    Page<Product> findAll(Pageable pageable);
+
+    Page<Product> findMen(Pageable pageable);
+
+    Page<Product> findWomen(Pageable pageable);
+
+    Page<Product> findSale(Pageable pageable);
 
     Product findByID(Long Id);
 
