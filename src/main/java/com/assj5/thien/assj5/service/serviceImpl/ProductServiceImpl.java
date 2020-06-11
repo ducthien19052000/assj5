@@ -1,7 +1,6 @@
 package com.assj5.thien.assj5.service.serviceImpl;
 
 
-import com.assj5.thien.assj5.model.BillDetail;
 import com.assj5.thien.assj5.model.Product;
 import com.assj5.thien.assj5.repository.ProductRepository;
 import com.assj5.thien.assj5.service.ProductSevice;
@@ -10,7 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductSevice {
@@ -56,5 +54,10 @@ public class ProductServiceImpl implements ProductSevice {
     @Override
     public void delete(Long Id) {
         productRepository.deleteById(Id);
+    }
+
+    @Override
+    public Page<Product> findAllByCategoryId(Pageable pageable,Long id) {
+        return productRepository.findAllByCategoryId(pageable,id);
     }
 }

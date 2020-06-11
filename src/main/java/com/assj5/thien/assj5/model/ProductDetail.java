@@ -11,6 +11,7 @@ public class ProductDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long prodcutDetailId;
+    private Integer productAmount;
 
     @ManyToOne
     @JoinColumn(name = "productId")

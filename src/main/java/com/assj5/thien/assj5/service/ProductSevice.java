@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 public interface ProductSevice {
     Page<Product> findAll(Pageable pageable);
 
+    Page<Product> findAllByCategoryId(Pageable pageable,Long id);
+
     Page<Product> findMen(Pageable pageable);
 
     Page<Product> findWomen(Pageable pageable);
