@@ -58,15 +58,20 @@
                     <tbody>
                     <tr th:each="cart : ${session.cart}">
                         <td><a class="ps-product__preview" href="product-detail.html" th:text="${cart.product.productName} + ' Size ' + ${cart.size.sizeName}"><img class="mr-15" width="100px" height="100px" th:src="@{images/access/{image}(image = ${cart.product.productImg1})}" alt=""></a></td>
-                        <td th:text="${cart.product.productPrice} +' VND'"/>
+                        <td th:text="${#numbers.formatInteger(cart.product.productPrice-cart.product.productPrice /100*cart.product.productSale,0,'COMMA')} +' VND'"/>
                         <td>
-                            <div class="form-group--number">
-                                <input class="form-control" th:value="${cart.quantity}" type="number" min="1" th:max="${cart.productTotal}">
-                            </div>
+                            <form th:action="@{/update/{productId}(productId=${cart.product.productId})}" method="get" id="formUpdate">
+                                <div class="form-group--number">
+                                    <input class="form-control" onchange="updateFrom()" name="quantity" th:value="${cart.quantity}" type="number" min="1" th:max="${cart.productTotal}"  >
+                                </div>
+                            </form>
+
                         </td>
                         <td th:text="${#numbers.formatInteger((cart.product.productPrice-cart.product.productPrice* cart.product.productSale/100) * cart.quantity,0,'COMMA')} + ' VND'"/>
                         <td>
-                            <div class="ps-remove"></div>
+                            <a th:href="@{/remove/{productId}(productId = ${cart.product.productId})}">
+                                 <div class="ps-remove"></div>
+                            </a>
                         </td>
                     </tr>
                     </tbody>
@@ -112,6 +117,14 @@
 <script type="text/javascript" src="plugins/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
 <script type="text/javascript" src="plugins/revolution/js/extensions/revolution.extension.actions.min.js"></script>
 <!-- Custom scripts-->
+
+<script>
+    function updateFrom(){
+        setTimeout(function () {
+            document.getElementById("formUpdate").submit();
+        },1000);
+    }
+</script>
 <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

@@ -56,33 +56,22 @@
                         <input class="form-control" type="text" placeholder="Search Product…">
                         <button><i class="ps-icon-search"></i></button>
                     </form>
-                    <div class="ps-cart"><a class="ps-cart__toggle" th:href="@{/cart}"><i class="ps-icon-shopping-cart"></i></a>
+                    <div class="ps-cart"><a class="ps-cart__toggle" th:href="@{/cart}"><span th:if="${session.myCartNum}"><i th:text="${session.myCartNum}"></i></span><i class="ps-icon-shopping-cart"></i></a>
                         <div class="ps-cart__listing">
                             <div class="ps-cart__content">
-<!--                                <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>-->
-<!--                                    <div class="ps-cart-item__thumbnail"><a href="product-detail.html"></a><img src="images/cart-preview/1.jpg" alt=""></div>-->
-<!--                                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.html">Amazin’ Glazin’</a>-->
-<!--                                        <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>-->
-<!--                                    <div class="ps-cart-item__thumbnail"><a href="product-detail.html"></a><img src="images/cart-preview/2.jpg" alt=""></div>-->
-<!--                                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.html">The Crusty Croissant</a>-->
-<!--                                        <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>-->
-<!--                                    <div class="ps-cart-item__thumbnail"><a href="product-detail.html"></a><img src="images/cart-preview/3.jpg" alt=""></div>-->
-<!--                                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.html">The Rolling Pin</a>-->
-<!--                                        <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>-->
-<!--                                    </div>-->
-<!--                                </div>-->
+                                <div class="ps-cart-item" th:each="carts :${session.cart}">
+                                    <a class="ps-cart-item__close" th:href="@{/remove/{productId}(productId = ${carts.product.productId})}"></a>
+                                    <div class="ps-cart-item__thumbnail"><a href="product-detail.html"></a><img th:src="@{images/access/{image}(image=${carts.product.productImg1})}" alt=""></div>
+                                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.html" th:text="${carts.product.productName}+' Size '+${carts.size.sizeName}"></a>
+                                        <p><span>Quantity:<i th:text="${carts.quantity}"></i></span><span>Total:<i  th:text="${#numbers.formatInteger((carts.product.productPrice -carts.product.getProductPrice()/100*carts.product.productSale)*carts.quantity,0,'COMMA')} +' VNĐ'"></i></span></p>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="ps-cart__total">
-<!--                                <p>Number of items:<span>36</span></p>-->
-<!--                                <p>Item Total:<span>£528.00</span></p>-->
+                                <p>Total:<span th:text="${#numbers.formatInteger(session.myCartTotal,0,'COMMA')}+'VNĐ'" th:if="${session.myCartTotal}"></span></p>
                             </div>
-                            <div class="ps-cart__footer"><a class="ps-btn"th:href="@{/cart}">Check out<i class="ps-icon-arrow-left"></i></a></div>
+                            <div class="ps-cart__footer"><a class="ps-btn"th:href="@{/checkout}">Check out<i class="ps-icon-arrow-left"></i></a></div>
                         </div>
                     </div>
                     <div class="menu-toggle"><span></span></div>

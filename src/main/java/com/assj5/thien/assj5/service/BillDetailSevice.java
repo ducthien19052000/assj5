@@ -14,4 +14,6 @@ public interface BillDetailSevice {
     void update(BillDetail billDetail);
 
     void delete(Long Id);
+
+    void saveAll(List<BillDetail> billDetails);
 }

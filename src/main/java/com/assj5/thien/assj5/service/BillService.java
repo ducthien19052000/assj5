@@ -15,4 +15,6 @@ public interface BillService {
     void update(Bill bill);
 
     void delete(Long id);
+
+    void saveBySession(Bill bill);
 }

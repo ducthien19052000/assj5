@@ -17,7 +17,8 @@ public class Bill {
     private Timestamp billDate;
     private String customerName;
     private String customerPhone;
-    private String emaill;
+    private String email;
+    private String address;
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;

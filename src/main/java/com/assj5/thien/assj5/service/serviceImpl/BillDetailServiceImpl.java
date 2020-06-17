@@ -43,4 +43,11 @@ public class BillDetailServiceImpl implements BillDetailSevice  {
         billDetailRepository.deleteById(Id);
 
     }
+
+    @Override
+    public void saveAll(List<BillDetail> billDetails) {
+        for(BillDetail billDetail : billDetails){
+            billDetailRepository.save(billDetail);
+        }
+    }
 }

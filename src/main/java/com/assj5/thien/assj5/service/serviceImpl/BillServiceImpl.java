@@ -2,6 +2,7 @@ package com.assj5.thien.assj5.service.serviceImpl;
 
 import com.assj5.thien.assj5.model.Bill;
 import com.assj5.thien.assj5.repository.BillRepository;
+import com.assj5.thien.assj5.repository.repositoryImpl.CheckOutRepository;
 import com.assj5.thien.assj5.service.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,10 @@ public class BillServiceImpl implements BillService {
 
     @Autowired
     private BillRepository billRepository;
+
+    @Autowired
+    private CheckOutRepository checkOutRepository;
+
     @Override
     public List<Bill> findAll() {
         return billRepository.findAll();
@@ -38,5 +43,10 @@ public class BillServiceImpl implements BillService {
     public void delete(Long id) {
         billRepository.deleteById(id);
 
+    }
+
+    @Override
+    public void saveBySession(Bill bill) {
+        checkOutRepository.save(bill);
     }
 }
